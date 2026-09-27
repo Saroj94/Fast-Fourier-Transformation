@@ -59,7 +59,7 @@ X[k]=a_{k}+b_{k}i
 - b_{k} (Imaginary part): Represents how much a sine wave of that same frequency matches the signal. For instance, looking at the index corresponding to $\(50\text{ Hz}\) (\(k = 50\))$, the FFT outputs a large complex number:
  
 ```math
-\[X[50]=24.03-480.45i\]
+X[50]=24.03-480.45i
 ```
 
 ## **Applied Power Spectral Density (PSD)**
