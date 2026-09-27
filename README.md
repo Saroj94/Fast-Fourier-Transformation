@@ -1,11 +1,9 @@
 ## Fast Fourier Transformation
-    A fast algorithm that converts a signal from its time or space domain into its frequency components. In other words, a Fourier-transform converts a signal from its original domain (often time or space) to a representation in the frequency domain and vice versa.
+  A fast algorithm that converts a signal from its time or space domain into its frequency components. In other words, a Fourier-transform converts a signal from its original domain (often time or space) to a representation in the frequency domain and vice versa.
 
 ## Key Applications
- 1. Digital Communications
-    
- 2. Audio and Image Processing
-    
+ 1. Digital Communications   
+ 2. Audio and Image Processing   
  3. Medical Imaging
     
 # **Analytical Method**
@@ -21,7 +19,7 @@ To filter a noisy signal analytically using the Fast Fourier Transform (FFT), yo
 
 ## **Problem Statement: Noisy Signal Equation**
 <p align="center">
-  <img src="Fast-Fourier-Transformation/plots/clean_noise.png" alt="Noisy Signal" width="650">
+  <img src="plots/clean_noise.png" alt="Noisy Signal" width="650">
   <br>
   <em>Figure 1: <Noisy Signal Equation></em>
 </p>
@@ -38,7 +36,7 @@ We sample this signal at a frequency $(\[f_{s}\])$ of $\(1000\text{ Hz}\)$ over 
 The Fourier Computation mapped a time data into an array of complex numbers $\(X[k] = a_k + b_k i\)$, storing both the amplitude and the phase shift of every frequency.
 
 <p align="center">
-  <img src="Fast-Fourier-Transformation/plots/fft-psd.png" alt="FFT Transformation" width="650">
+  <img src="plots/fft-psd.png" alt="FFT Transformation" width="650">
   <br>
   <em>Figure 1: <Fast Fourier Transformation></em>
 </p>
@@ -74,7 +72,7 @@ To find the real-valued power at a frequency, we must multiply the FFT output $\
 The Result: This strips away the imaginary unit $\[i\]$ and gives a completely real number representing the **pure power energy** at that frequency bin.
 
 <p align="center">
-  <img src="Fast-Fourier-Transformation/plots/fft-psd-filtered-signal.png" alt="Clean Filtered out signal" width="650">
+  <img src="plots/fft-psd-filtered-signal.png" alt="Clean Filtered out signal" width="650">
   <br>
   <em>Figure 1: <Clean Filtered Out Signal ></em>
 </p>
