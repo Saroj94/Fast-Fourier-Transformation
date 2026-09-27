@@ -18,8 +18,9 @@
 To filter a noisy signal analytically using the Fast Fourier Transform (FFT), you must map the time-domain signal into its complex number frequency components, apply a threshold filter, and map it back.
 
 ## **Problem Statement: Noisy Signal Equation**
+
 <p align="center">
-  <img src="plots/clean_noisy.png" alt="Noisy signal" width="650">
+  <img src="plots/clean-noisy.png" alt="Noisy signal" width="650">
   <br>
   <em>Figure 1: Noisy signal</em>
 </p>
