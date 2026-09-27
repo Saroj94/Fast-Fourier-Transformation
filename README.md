@@ -19,12 +19,6 @@ To filter a noisy signal analytically using the Fast Fourier Transform (FFT), yo
 
 ## **Problem Statement: Noisy Signal Equation**
 
-<p align="center">
-  <img src="plots/clean_noise.png" alt="Noisy signal" width="650">
-  <br>
-  <em>Figure 1: Noisy signal</em>
-</p>
-
 Suppose you have a continuous time-domain signal \(x(t)\) composed of a clean \(50\text{ Hz}\) sine wave corrupted by high-frequency noise \(n(t)\):
 
 ```math
@@ -32,6 +26,12 @@ x(t)=\sin (2\pi \cdot 50\cdot t)+1.5\sin (2\pi \cdot 300\cdot t)
 ```
 
 We sample this signal at a frequency $(\[f_{s}\])$ of $\(1000\text{ Hz}\)$ over $\[1\]$ second, yielding $\(N = 1000\)$ discrete data points: $\(x[0], x[1], \dots, x[N-1]\)$.
+
+<p align="center">
+  <img src="plots/clean_noise.png" alt="Noisy signal" width="650">
+  <br>
+  <em>Figure 1: Noisy signal</em>
+</p>
 
 ## **Method: Transform to Complex Numbers (Fourier Computation)**
 The Fourier Computation mapped a time data into an array of complex numbers $\(X[k] = a_k + b_k i\)$, storing both the amplitude and the phase shift of every frequency.
