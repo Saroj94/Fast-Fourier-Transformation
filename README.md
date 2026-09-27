@@ -55,8 +55,8 @@ Using Euler's identity $(\(e^{-i\theta} = \cos\theta - i\sin\theta\))$, each fre
 X[k]=a_{k}+b_{k}i
 ```
 
-- \[a_{k}\] (Real part): Represents how much a cosine wave of frequency $\(f = \frac{k \cdot f_s}{N}\)$ matches the signal.
-- \[b_{k}\] (Imaginary part): Represents how much a sine wave of that same frequency matches the signal. For instance, looking at the index corresponding to $\(50\text{ Hz}\) (\(k = 50\))$, the FFT outputs a large complex number:
+- a_{k} (Real part): Represents how much a cosine wave of frequency $\(f = \frac{k \cdot f_s}{N}\)$ matches the signal.
+- b_{k} (Imaginary part): Represents how much a sine wave of that same frequency matches the signal. For instance, looking at the index corresponding to $\(50\text{ Hz}\) (\(k = 50\))$, the FFT outputs a large complex number:
  
 ```math
 \[X[50]=24.03-480.45i\]
@@ -68,7 +68,7 @@ The PSD multiply the complex number by its own complex conjugate.
 To find the real-valued power at a frequency, we must multiply the FFT output $\(X[k]\)$ by its complex conjugate $\(X^*[k] = a_k - b_k i\)$: 
 
 ```math
-\text{PSD}[k]=\frac{X[k]\cdot X^{*}[k]}{f_{s}\cdot N}=\frac{(a_{k}+b_{k}i)(a_{k}-b_{k}i)}{f_{s}\cdot N}=\frac{a_{k}^{2}+b_{k}^{2}}{f_{s}\cdot N}\
+\text{PSD}[k]=\frac{X[k]\cdot X^{*}[k]}{f_{s}\cdot N}=\frac{(a_{k}+b_{k}i)(a_{k}-b_{k}i)}{f_{s}\cdot N}=\frac{a_{k}^{2}+b_{k}^{2}}{f_{s}\cdot N}
 ```
 
 The Result: This strips away the imaginary unit $\[i\]$ and gives a completely real number representing the **pure power energy** at that frequency bin.
