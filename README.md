@@ -19,7 +19,7 @@ To filter a noisy signal analytically using the Fast Fourier Transform (FFT), yo
 
 ## **Problem Statement: Noisy Signal Equation**
 <p align="center">
-  <img src="plots/clean_noise.png" alt="Noisy Signal" width="650">
+  <img src="plots/clean_noise.png" width="650">
   <br>
   <em>Figure 1: <Noisy Signal Equation></em>
 </p>
@@ -36,7 +36,7 @@ We sample this signal at a frequency $(\[f_{s}\])$ of $\(1000\text{ Hz}\)$ over 
 The Fourier Computation mapped a time data into an array of complex numbers $\(X[k] = a_k + b_k i\)$, storing both the amplitude and the phase shift of every frequency.
 
 <p align="center">
-  <img src="plots/fft-psd.png" alt="FFT Transformation" width="650">
+  <img src="plots/fft-psd.png" width="650">
   <br>
   <em>Figure 1: <Fast Fourier Transformation></em>
 </p>
@@ -72,7 +72,7 @@ To find the real-valued power at a frequency, we must multiply the FFT output $\
 The Result: This strips away the imaginary unit $\[i\]$ and gives a completely real number representing the **pure power energy** at that frequency bin.
 
 <p align="center">
-  <img src="plots/fft-psd-filtered-signal.png" alt="Clean Filtered out signal" width="650">
+  <img src="plots/fft-psd-filtered-signal.png" width="650">
   <br>
   <em>Figure 1: <Clean Filtered Out Signal ></em>
 </p>
