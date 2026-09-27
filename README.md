@@ -28,7 +28,7 @@ x(t)=\sin (2\pi \cdot 50\cdot t)+1.5\sin (2\pi \cdot 300\cdot t)
 We sample this signal at a frequency $(\[f_{s}\])$ of $\(1000\text{ Hz}\)$ over $\[1\]$ second, yielding $\(N = 1000\)$ discrete data points: $\(x[0], x[1], \dots, x[N-1]\)$.
 
 <p align="center">
-  <img src="plots/clean_noise.png" alt="Noisy signal" width="650">
+  <img src="plots/clean_noisy.png" alt="Noisy signal" width="650">
   <br>
   <em>Figure 1: Noisy signal</em>
 </p>
