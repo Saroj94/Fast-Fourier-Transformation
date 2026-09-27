@@ -19,9 +19,9 @@ To filter a noisy signal analytically using the Fast Fourier Transform (FFT), yo
 
 ## **Problem Statement: Noisy Signal Equation**
 <p align="center">
-  <img src="plots/clean_noise.png" width="650">
+  <img src="plots/clean_noise.png" alt="Noisy signal" width="650">
   <br>
-  <em>Figure 1: <Noisy Signal Equation></em>
+  <em>Figure 1: Noisy signal</em>
 </p>
 
 Suppose you have a continuous time-domain signal \(x(t)\) composed of a clean \(50\text{ Hz}\) sine wave corrupted by high-frequency noise \(n(t)\):
