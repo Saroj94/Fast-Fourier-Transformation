@@ -54,8 +54,8 @@ Using Euler's identity $(\(e^{-i\theta} = \cos\theta - i\sin\theta\))$, each fre
 X[k]=a_{k}+b_{k}i
 ```
 
-- $a_{k}$ (Real part): Represents how much a cosine wave of frequency $\(f = \frac{k \cdot f_s}{N}\)$ matches the signal.
-- $b_{k}$ (Imaginary part): Represents how much a sine wave of that same frequency matches the signal. For instance, looking at the index corresponding to $\(50\text{ Hz}\) (\(k = 50\))$, the FFT outputs a large complex number:
+- $\mathbf{a_{k}}$ (Real part): Represents how much a cosine wave of frequency $\(f = \frac{k \cdot f_s}{N}\)$ matches the signal.
+- $\mathbf{b_{k}}$ (Imaginary part): Represents how much a sine wave of that same frequency matches the signal. For instance, looking at the index corresponding to $\(50\text{ Hz}\) (\(k = 50\))$, the FFT outputs a large complex number:
  
 ```math
 X[50]=24.03-480.45i
