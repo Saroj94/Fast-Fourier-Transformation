@@ -67,6 +67,7 @@ We sample this signal at a frequency $(\[f_{s}\])$ of $\(1000\text{ Hz}\)$ over 
 
 ## **Compute the Fast Fourier Tansformation**
 **Transform to Complex Numbers**
+
 The Fourier Computation mapped a time data into an array of complex numbers $\(X[k] = a_k + b_k i\)$, storing both the amplitude and the phase shift of every frequency.
 
 Code:
@@ -149,6 +150,21 @@ fhat_clean = fhat * indices ## zero out all small frequency coefficient on Y axi
 clean_fft = np.fft.ifft(fhat_clean) ## Inverse FFT for filtered time signal
 ```
 
+### **Alternative Code for Filtering out**
+```python
+#Apply your analytical threshold filter
+threshold = 100
+fhat_clean = np.where(np.abs(fhat) > threshold, fhat, 0.0)
+
+#Reconstruct the clean time-domain signal using Inverse FFT (IFFT)
+# We take the real part (.real) because minor floating-point errors can leave tiny imaginary residues
+reconstructed_signal = np.fft.ifft(fhat_clean).real
+
+#Truncate back to original signal length if n was larger than the sample count
+# (e.g., if you padded n=512 for a 500-sample signal)
+reconstructed_signal = reconstructed_signal[:len(noisy_freq)]
+```
+
 <p align="center">
   <img src="plots/half-clean-noisy-psd-threshold.png" width="650">
   <br>
@@ -156,11 +172,18 @@ clean_fft = np.fft.ifft(fhat_clean) ## Inverse FFT for filtered time signal
 </p>
 
 ## **Final Clean Filtered Signal**
-Once we apply the filter value on magnitude, we get clean two frequencies having magnitude above 100. So, that we filtered out the noisy signal and produce clean signal.
+Once we apply a threshold filter to the magnitude, we are left with two distinct frequencies with magnitudes above 100. This filters out the noise, producing a clean signal.
 
+<p align="center">
+  <img src="plots/signal-recons-threshold.png" width="650">
+  <br>
+  <em>Fig-6: Signal Reconstruction After Magnitude Thresholding</em>
+</p>
+
+### **Clean filtered signal**
 <p align="center">
   <img src="plots/filtered-signal.png" width="650">
   <br>
-  <em>Fig-6: Clean Signal after filter</em>
+  <em>Fig-7: Clean Signal after filter</em>
 </p>
 
