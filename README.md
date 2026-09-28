@@ -150,7 +150,7 @@ clean_fft = np.fft.ifft(fhat_clean) ## Inverse FFT for filtered time signal
 ```
 
 <p align="center">
-  <img src="plots/half-clean-power-spectral-density-threshold.png" width="650">
+  <img src="plots/half-clean-noisy-psd-threshold.png" width="650">
   <br>
   <em>Fig-5: Half Power Spectral Density with threshold(filter) point</em>
 </p>
