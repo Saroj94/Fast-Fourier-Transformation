@@ -46,14 +46,9 @@ Hence, the clean signal as given below:
 <p align="center">
   <img src="plots/clean-initial-signal.png" alt="Noisy signal" width="650">
   <br>
-  <em>Fig-1: Clean initial signal before FFT processing</em>
+  <em>Fig-1: Initial Clean signal before FFT processing</em>
 </p>
 
-Suppose you have a continuous time-domain signal $\(x(t)\)$ composed of a clean $\(50\text{ Hz}\)$ sine wave corrupted by high-frequency noise $\(n(t)\)$:
-
-```math
-x(t)=\sin (2\pi \cdot 50\cdot t)+1.5\sin (2\pi \cdot 300\cdot t)
-```
 ### **Noisy and Clean Signal**
 Once the gaussian noise is added onto a clean signal then it looks like below:
 <p align="center">
@@ -61,6 +56,12 @@ Once the gaussian noise is added onto a clean signal then it looks like below:
   <br>
   <em>Fig-2: Clean Noisy signal before FFT processing</em>
 </p>
+
+Suppose you have a continuous time-domain signal $\(x(t)\)$ composed of a clean $\(50\text{ Hz}\)$ sine wave corrupted by high-frequency noise $\(n(t)\)$:
+
+```math
+x(t)=\sin (2\pi \cdot 50\cdot t)+1.5\sin (2\pi \cdot 300\cdot t)
+```
 
 We sample this signal at a frequency $(\[f_{s}\])$ of $\(1000\text{ Hz}\)$ over $\[1\]$ second, yielding $\(N = 1000\)$ discrete data points: $\(x[0], x[1], \dots, x[N-1]\)$.
 
@@ -129,7 +130,7 @@ The Result: This strips away the imaginary unit $\[i\]$ and gives a completely r
 <p align="center">
   <img src="plots/full-power-spectral-density.png" width="650">
   <br>
-  <em>Fig-4: Full Power Spectral Density</em>
+  <em>Fig-4: Full Power Spectral Density(PSD)</em>
 </p>
 
 ### **Threshold Point**
@@ -149,7 +150,7 @@ clean_fft = np.fft.ifft(fhat_clean) ## Inverse FFT for filtered time signal
 ```
 
 <p align="center">
-  <img src="plots/half-power-spectral-density-threshold.png" width="650">
+  <img src="plots/half-clean-power-spectral-density-threshold.png" width="650">
   <br>
   <em>Fig-5: Half Power Spectral Density with threshold(filter) point</em>
 </p>
