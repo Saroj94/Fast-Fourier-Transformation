@@ -10,38 +10,81 @@
 ## **Table of Contents**
 1. [Introduction](#introduction)
 2. [Problem Statement: Noisy Signal Equation](#problem-statement-noisy-signal-equation)
-3. [Transform to Complex Numbers (Fourier Computation)](#method-transform-to-complex-numbers-fourier-computation)
+3. [ompute the Fast Fourier Tansformation](#method-transform-to-complex-numbers-fourier-computation)
 4. [Applied Power Spectral Density (PSD)](#applied-power-spectral-density-psd)
+5. [Final Clean Filtered Signal](#final-clean-filtered-signal)
 
 
 ## **Introduction**
 To filter a noisy signal analytically using the Fast Fourier Transform (FFT), you must map the time-domain signal into its complex number frequency components, apply a threshold filter, and map it back.
 
 ## **Problem Statement: Noisy Signal Equation**
+To formulate this problem, the python code used is here.
+```python
+## create signal with two frequencies
+## time: sample per sec
+dt = 0.001
 
+## dataset samples from 0-1 with sample step 'dt' time
+t = np.arange(0, 1, dt)
+
+## two frequencies
+## f_raw1 of frequency-50 at 't'
+f_raw1 = np.sin(1*np.pi*50*t)
+
+## f_raw2 of frequency-300 at 't'
+f_raw2 = np.sin(2*np.pi*300*t)
+
+## clean signal
+clean_f = f_raw1+f_raw2
+
+## add noise on the clean_f (clean frequency)
+noisy_freq = clean_f + 1.7*np.random.randn(len(t))
+```
+### **Initial Clean Signal**
+Hence, the clean signal as given below:
 <p align="center">
-  <img src="plots/clean-noisy.png" alt="Noisy signal" width="650">
+  <img src="plots/clean-initial-signal.png" alt="Noisy signal" width="650">
   <br>
-  <em>Figure 1: Noisy signal</em>
+  <em>Fig-1: Clean initial signal before FFT processing</em>
 </p>
 
-Suppose you have a continuous time-domain signal \(x(t)\) composed of a clean \(50\text{ Hz}\) sine wave corrupted by high-frequency noise \(n(t)\):
+Suppose you have a continuous time-domain signal $\(x(t)\)$ composed of a clean $\(50\text{ Hz}\)$ sine wave corrupted by high-frequency noise $\(n(t)\)$:
 
 ```math
 x(t)=\sin (2\pi \cdot 50\cdot t)+1.5\sin (2\pi \cdot 300\cdot t)
 ```
+### **Noisy and Clean Signal**
+Once the gaussian noise is added onto a clean signal then it looks like below:
+<p align="center">
+  <img src="plots/clean_noisy.png" alt="Noisy signal" width="650">
+  <br>
+  <em>Fig-2: Clean Noisy signal before FFT processing</em>
+</p>
 
 We sample this signal at a frequency $(\[f_{s}\])$ of $\(1000\text{ Hz}\)$ over $\[1\]$ second, yielding $\(N = 1000\)$ discrete data points: $\(x[0], x[1], \dots, x[N-1]\)$.
 
-## **Method: Transform to Complex Numbers (Fourier Computation)**
+## **Compute the Fast Fourier Tansformation**
+**Transform to Complex Numbers**
 The Fourier Computation mapped a time data into an array of complex numbers $\(X[k] = a_k + b_k i\)$, storing both the amplitude and the phase shift of every frequency.
 
+Code:
+```python
+## compute the Fast Fourier Tansformation
+## number of sample(n)/length of datapoints
+n = len(t)
+
+## compute the fft on noisy data
+fhat = np.fft.fft(noisy_freq, n) ## complex number with magnitude and phase: magnitude tells how important the frequency is? and phase tells you if its more cosine or sine.
+```
+After computation, the distribution of datapoints given below: 
 <p align="center">
-  <img src="plots/fft-psd.png" width="650">
+  <img src="plots/fft-complex-plane.png" width="650">
   <br>
-  <em>Figure 1: Fast Fourier Transformation</em>
+  <em>Fig-3: Applied FFT and plot its real(cosine) and imaginary(sine) part</em>
 </p>
 
+Hence, the real and imaginary part of datapoints distribution are exactly symetrical. 
 
 In fact, we pass the discrete sequence $\(x[n]\)$ into the Discrete Fourier Transform (DFT) equation to convert it into an array of complex numbers $\(X[k]\)$:
 
@@ -62,8 +105,19 @@ X[50]=24.03-480.45i
 ```
 
 ## **Applied Power Spectral Density (PSD)**
-The PSD multiply the complex number by its own complex conjugate.
+The PSD is computed by multipying the complex number by its own complex conjugate. 
 
+### **Frequency vectors along x-Axis**
+```python
+## Power spectral Density  (power per frequency)
+PSD = fhat * np.conjugate(fhat) / n ## conjugate helps to calculate the real magnitude of the signal
+
+## frequencies vector along x-axis
+freq_vec = np.linspace(0, 1/dt, n, endpoint=False) ## same: freq_vec1 = (1/(dt*n)) * np.arange(n)
+L = np.arange(1, np.floor(n/2), dtype='int') ## A range of array frome 1 to 500.
+```
+
+### **Analytically**:
 To find the real-valued power at a frequency, we must multiply the FFT output $\(X[k]\)$ by its complex conjugate $\(X^*[k] = a_k - b_k i\)$: 
 
 ```math
@@ -73,8 +127,39 @@ To find the real-valued power at a frequency, we must multiply the FFT output $\
 The Result: This strips away the imaginary unit $\[i\]$ and gives a completely real number representing the **pure power energy** at that frequency bin.
 
 <p align="center">
-  <img src="plots/fft-psd-filtered-signal.png" width="650">
+  <img src="plots/full-power-spectral-density.png" width="650">
   <br>
-  <em>Figure 1: Clean Filtered Out Signal</em>
+  <em>Fig-4: Full Power Spectral Density</em>
+</p>
+
+### **Threshold Point**
+Set the cut-off point to filtered out the noisy signal and generate the clean signal.
+
+```python
+## Use PSD to filter out noisy frequencies
+indices = PSD>100 ## find all frequencies with large power
+
+## each rows of PSD has the frequecies values
+PSD_clean = PSD * indices ## zero out all psd lower than a threshold value
+
+fhat_clean = fhat * indices ## zero out all small frequency coefficient on Y axis
+
+## perform inverse Fast Fourier Transform to get clean signal
+clean_fft = np.fft.ifft(fhat_clean) ## Inverse FFT for filtered time signal
+```
+
+<p align="center">
+  <img src="plots/half-power-spectral-density-threshold.png" width="650">
+  <br>
+  <em>Fig-5: Half Power Spectral Density with threshold(filter) point</em>
+</p>
+
+## **Final Clean Filtered Signal**
+Once we apply the filter value on magnitude, we get clean two frequencies having magnitude above 100. So, that we filtered out the noisy signal and produce clean signal.
+
+<p align="center">
+  <img src="plots/filtered-signal.png" width="650">
+  <br>
+  <em>Fig-6: Clean Signal after filter</em>
 </p>
 
